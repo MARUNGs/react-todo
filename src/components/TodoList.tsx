@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import CreateTodo from "./CreateTodo";
-import { todoState } from "../atoms";
+import { toDoSelector } from "../atoms";
 import Todo from "./Todo";
 
 export default function TodoList() {
@@ -116,7 +116,10 @@ export default function TodoList() {
 
   // 기존 작업물은 주석처리 하자. (useForm을 사용하기 전.)
   // 고쳐보도록 하자. (useForm 사용) + recoil
-  const todoList = useRecoilValue(todoState);
+  // const todoList = useRecoilValue(todoState);
+
+  // selector 호출(useRecoilValue로 호출이 가능하다.)
+  const [toDos, doing, done] = useRecoilValue(toDoSelector);
 
   return (
     <>
@@ -126,9 +129,26 @@ export default function TodoList() {
 
         <CreateTodo />
 
+        <h2>Todo List</h2>
         <ul>
-          {todoList?.map((todo) => (
+          {toDos?.map((todo) => (
             // 같은 모양의 타입이면 배열 요소를 담아줄 수 있다.
+            <Todo key={todo.id} {...todo} />
+          ))}
+        </ul>
+
+        <hr />
+        <h2>Doing List</h2>
+        <ul>
+          {doing?.map((todo) => (
+            <Todo key={todo.id} {...todo} />
+          ))}
+        </ul>
+
+        <hr />
+        <h2>Done List</h2>
+        <ul>
+          {done?.map((todo) => (
             <Todo key={todo.id} {...todo} />
           ))}
         </ul>
