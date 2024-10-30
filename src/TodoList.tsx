@@ -8,9 +8,9 @@ interface FormData {
   extraError?: string;
 }
 
-interface IForm {
-  toDo: string;
-}
+// interface IForm {
+//   toDo: string;
+// }
 
 export default function TodoList() {
   // useForm을 활용한 예시
