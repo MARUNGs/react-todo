@@ -1,5 +1,5 @@
 import { GlobalStyle } from "./styles/AppStyled";
-import TodoList from "./TodoList";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (

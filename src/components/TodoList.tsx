@@ -1,18 +1,18 @@
-import { useForm } from "react-hook-form";
-
-interface FormData {
-  email: string;
-  name: string;
-  pw: string;
-  pwCheck: string;
-  extraError?: string;
-}
-
-// interface IForm {
-//   toDo: string;
-// }
+import { useRecoilValue } from "recoil";
+import CreateTodo from "./CreateTodo";
+import { todoState } from "../atoms";
+import Todo from "./Todo";
 
 export default function TodoList() {
+  /*
+  interface FormData {
+    email: string;
+    name: string;
+    pw: string;
+    pwCheck: string;
+    extraError?: string;
+  }
+
   // useForm을 활용한 예시
   const {
     register,
@@ -112,31 +112,27 @@ export default function TodoList() {
       </div>
     </>
   );
+  */
 
   // 기존 작업물은 주석처리 하자. (useForm을 사용하기 전.)
-  // 고쳐보도록 하자. (useForm 사용)
-  /*
-  const { register, handleSubmit, setValue } = useForm<IForm>();
-  const onSubmit = (data: IForm) => {
-    console.log("add to to", data.toDo);
-    setValue("toDo", "");
-  };
+  // 고쳐보도록 하자. (useForm 사용) + recoil
+  const todoList = useRecoilValue(todoState);
 
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            {...register("toDo", {
-              required: "Please write a To Do",
-            })}
-            type="text"
-            placeholder="write a to do..."
-          />
-          <button>add</button>
-        </form>
+        <h1>Todo List</h1>
+        <hr />
+
+        <CreateTodo />
+
+        <ul>
+          {todoList?.map((todo) => (
+            // 같은 모양의 타입이면 배열 요소를 담아줄 수 있다.
+            <Todo key={todo.id} {...todo} />
+          ))}
+        </ul>
       </div>
     </>
   );
-  */
 }
