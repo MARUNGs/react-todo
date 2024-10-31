@@ -1,7 +1,7 @@
 import { atom, selector } from "recoil";
 
 // enum
-// 일련의 숫자를 문자로 표현해준다.
+// 계속해서 사용해야 할 값을 저장해주는 도구. 일련의 숫자를 문자로 표현해준다.
 export enum Categories {
   "TODO", //0
   "DOING", //1
