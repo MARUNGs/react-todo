@@ -1,6 +1,6 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import CreateTodo from "./CreateTodo";
-import { toDoSelector } from "../atoms";
+import { Categories, categoryState, toDoSelector } from "../atoms";
 import Todo from "./Todo";
 
 export default function TodoList() {
@@ -117,9 +117,12 @@ export default function TodoList() {
   // 기존 작업물은 주석처리 하자. (useForm을 사용하기 전.)
   // 고쳐보도록 하자. (useForm 사용) + recoil
   // const todoList = useRecoilValue(todoState);
-
+  const todos = useRecoilValue(toDoSelector);
   // selector 호출(useRecoilValue로 호출이 가능하다.)
-  const [toDos, doing, done] = useRecoilValue(toDoSelector);
+  const [category, setCategory] = useRecoilState(categoryState);
+  const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
+    setCategory(e.currentTarget.value as any);
+  };
 
   return (
     <>
@@ -127,8 +130,19 @@ export default function TodoList() {
         <h1>Todo List</h1>
         <hr />
 
+        <select value={category} onInput={onInput}>
+          <option value={Categories.TODO}>To do</option>
+          <option value={Categories.DOING}>Doing </option>
+          <option value={Categories.DONE}>Done</option>
+        </select>
+
         <CreateTodo />
 
+        {todos?.map((todo) => (
+          <Todo key={todo.id} {...todo} />
+        ))}
+
+        {/* 기존 소스코드
         <h2>Todo List</h2>
         <ul>
           {toDos?.map((todo) => (
@@ -151,7 +165,7 @@ export default function TodoList() {
           {done?.map((todo) => (
             <Todo key={todo.id} {...todo} />
           ))}
-        </ul>
+        </ul> */}
       </div>
     </>
   );
