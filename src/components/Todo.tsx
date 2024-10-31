@@ -6,8 +6,6 @@ const Todo = ({ text, category, id }: ITodo) => {
 
   // function
   const onClick = (newCategory: ITodo["category"]) => {
-    console.log(`새로운 카테고리: ${newCategory}`);
-
     setTodoList((currentArr) => {
       // step 1. find target
       const targetIdx = currentArr.findIndex((toDo) => toDo.id === id);
@@ -20,9 +18,8 @@ const Todo = ({ text, category, id }: ITodo) => {
       // step 3. setTodoList
       const front = currentArr.slice(0, targetIdx);
       const back = currentArr.slice(targetIdx + 1);
-      const newDotoList = [...front, newTodo, ...back];
-
-      return newDotoList;
+      const newTodoList = [...front, newTodo, ...back];
+      return newTodoList;
     });
   };
 

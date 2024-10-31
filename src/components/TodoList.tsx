@@ -121,7 +121,7 @@ export default function TodoList() {
   // selector 호출(useRecoilValue로 호출이 가능하다.)
   const [category, setCategory] = useRecoilState(categoryState);
   const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
-    setCategory(e.currentTarget.value as any);
+    setCategory(Number(e.currentTarget.value));
   };
 
   return (
@@ -141,31 +141,6 @@ export default function TodoList() {
         {todos?.map((todo) => (
           <Todo key={todo.id} {...todo} />
         ))}
-
-        {/* 기존 소스코드
-        <h2>Todo List</h2>
-        <ul>
-          {toDos?.map((todo) => (
-            // 같은 모양의 타입이면 배열 요소를 담아줄 수 있다.
-            <Todo key={todo.id} {...todo} />
-          ))}
-        </ul>
-
-        <hr />
-        <h2>Doing List</h2>
-        <ul>
-          {doing?.map((todo) => (
-            <Todo key={todo.id} {...todo} />
-          ))}
-        </ul>
-
-        <hr />
-        <h2>Done List</h2>
-        <ul>
-          {done?.map((todo) => (
-            <Todo key={todo.id} {...todo} />
-          ))}
-        </ul> */}
       </div>
     </>
   );
