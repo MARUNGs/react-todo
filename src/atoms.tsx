@@ -6,13 +6,12 @@ export enum Categories {
   "TODO", //0
   "DOING", //1
   "DONE", // 2
+  "DELETE",
 
   // 숫자가 아니라 문자열로 하고 싶다면?
-  /*
-  'TODO' = 'TODO',
-  'DOING' = 'DOING',
-  'DONE' = 'DONE'
-  */
+  // 'TODO' = 'TODO',
+  // 'DOING' = 'DOING',
+  // 'DONE' = 'DONE'
 }
 
 // interface

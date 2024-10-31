@@ -18,8 +18,10 @@ const Todo = ({ text, category, id }: ITodo) => {
       // step 3. setTodoList
       const front = currentArr.slice(0, targetIdx);
       const back = currentArr.slice(targetIdx + 1);
-      const newTodoList = [...front, newTodo, ...back];
-      return newTodoList;
+
+      return newCategory === Categories.DELETE
+        ? [...front, ...back] // 해당 todo 삭제
+        : [...front, newTodo, ...back]; // 상태 수정
     });
   };
 
@@ -36,6 +38,7 @@ const Todo = ({ text, category, id }: ITodo) => {
         {category !== Categories.DONE && (
           <button onClick={() => onClick(Categories.DONE)}>Done</button>
         )}
+        <button onClick={() => onClick(Categories.DELETE)}>❌</button>
       </li>
     </>
   );
