@@ -45,6 +45,7 @@ const localStorageEffect =
 
     // onSet(): 해당하는 atom의 값이 변경되었을 때 실행되는 함수
     onSet((newArr: any, _: any, isReset: boolean) => {
+      // isReset? atom의 default value로 리셋하느냐에 대한 boolean값 같다.
       isReset
         ? localStorage.removeItem(key)
         : localStorage.setItem(key, JSON.stringify(newArr));
